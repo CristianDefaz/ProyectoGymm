@@ -1,0 +1,30 @@
+
+/* Estilo para el contenedor del campo de contraseña y la imagen */
+.password-container {
+    position: relative;
+  }
+  
+  /* Estilo para la imagen de la contraseña */
+  #togglePassword {
+    max-width: 70%;
+    max-height: 70%;
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Ajusta esta propiedad para cambiar la distancia desde el borde derecho del campo de contraseña */
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  /* Estilo opcional para ajustar el ancho del campo de contraseña */
+  .form-control {
+    width: 100%;
+    /* Agrega otros estilos según tus necesidades */
+  }
+  .contador-column {
+    width: 60px; /* Ajusta el ancho según tus necesidades */
+}
+.img-container{
+  padding-top: 500px;
+}
+  
+  
