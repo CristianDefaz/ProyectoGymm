@@ -92,6 +92,9 @@
                                     <div class="text-center">
                                         <a class="small" href="./register.php">Crear cuenta!</a>
                                     </div>
+                                    <div class="text-center">
+                                        <a class="small" href="../../index.php">Menu Principal!</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -46,6 +46,8 @@ var guardayeditarcliente = (e) => {
     $('#cli_direccion').val('');
     $('#cli_email').val('');
     $('#cli_contrasena').val('');
+    header("Location: login.php");
+           exit();
   };
 
   init();

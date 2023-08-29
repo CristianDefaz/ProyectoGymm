@@ -107,14 +107,13 @@
                             </div>
                                 </div>
                                     <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary" id="btnGuardar" disabled>Guardar</button>
+                                    <button type="submit"  onclick="limpiar()"   class="btn btn-primary" id="btnGuardar" disabled>Guardar</button>
+                                    
                                     </div>
                                 </form>
 
                             <hr>
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Olvido su Contraseña?</a>
-                            </div>
+                       
                             <div class="text-center">
                                 <a class="small" href="./login.php">Ya tiene Cuenta? Ingrese!</a>
                             </div>
