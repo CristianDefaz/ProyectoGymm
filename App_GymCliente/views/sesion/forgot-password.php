@@ -123,6 +123,7 @@ if ($_POST) {
 
         // Establecer variables de sesión
         $_SESSION['codigo'] = $codigousu;
+        $_SESSION['cedula'] = $cedula;
         $_SESSION['nombre'] = $nombre;
         $_SESSION['apellido'] = $apellido;
         $_SESSION['fecha'] = $fechanacimiento;

@@ -1,7 +1,46 @@
 <?php
-ob_start();
+require_once '../../config/config.php';
+session_start();
+
+// Definir la función fuera de la clase
+function ActualizarContrasena($cliente_id, $nueva_contrasena) {
+    $conexion = new ClaseConexion();
+    $con = $conexion->ProcedimientoConectar();
+    $nueva_contrasena_hashed = password_hash($nueva_contrasena, PASSWORD_DEFAULT);
+    $query = "UPDATE cliente SET cli_contrasena = '$nueva_contrasena_hashed' WHERE cliente_id = '$cliente_id'";
+    $resultado = $con->query($query);
+
+    return $resultado;
+}
+
+// Tu código de conexión a la base de datos y otras importaciones
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nueva_contrasena = $_POST['cli_contrasena'];
+    $cliente_id = $_SESSION['codigo'];
+
+    if ($cliente_id && $nueva_contrasena) {
+        $resultado = ActualizarContrasena($cliente_id, $nueva_contrasena);
+
+        if ($resultado) {
+            // Contraseña actualizada exitosamente
+            header('location: ./login.php'); // Redirecciona a la página de inicio de sesión
+            exit;
+        } else {
+            // Ocurrió un error al actualizar la contraseña
+            // Puedes mostrar un mensaje de error o hacer algo más
+            header('location: ./perfil.php'); // Redirecciona con mensaje de error si es necesario
+            exit;
+        }
+    }
+}
 ?>
-<?php session_start(); ?>
+
+<!-- Tu HTML para la página de cambiar contraseña -->
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,13 +85,12 @@ ob_start();
                                         <h1 class="h4 text-gray-900 mb-2">Olvidaste tu Contraseña</h1>
                                         <p class="mb-4">Restaura tu contraseña</p>
                                     </div>
-                                    <form class="user"  method="post" >
-                                        <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" id="cli_contrasena" name="cli_contrasena" placeholder="Contraseña...">
-                                        </div>
-                                        <input type="hidden" name="action" value="forgot_password">
-                                        <button type="submit" class="btn btn-primary mx-auto col-md-12">Cambiar</button>
-                                    </form>
+                                    <form class="user" method="post">
+        <div class="form-group">
+            <input type="password" class="form-control form-control-user" id="cli_contrasena" name="cli_contrasena" placeholder="Contraseña...">
+        </div>
+        <button type="submit" class="btn btn-primary mx-auto col-md-12">Cambiar</button>
+    </form>
                                     <hr>
 
                                 </div>
@@ -80,40 +118,11 @@ ob_start();
  
 </body>
 </html>
-<?php
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $cliente_id = $_SESSION['codigo']; // Obtén el ID del cliente desde la sesión
-    $nueva_contrasena = $_POST['cli_contrasena'];
-
-    // Realiza el proceso de actualización de contraseña aquí
-    if ($cliente_id && $nueva_contrasena) {
-        $nueva_contrasena_hashed = password_hash($nueva_contrasena, PASSWORD_DEFAULT);
-
-        // Realiza la actualización en la base de datos
-        $conexion = new ClaseConexion();
-        $con = $conexion->ProcedimientoConectar();
-        $query = "UPDATE cliente SET cli_contrasena = '$nueva_contrasena_hashed' WHERE cliente_id = '$cliente_id'";
-        $resultado = $con->query($query);
-
-        if ($resultado) {
-            // Contraseña actualizada exitosamente
-            header('location: ./login.php'); // Redirecciona a la página de perfil o a donde desees
-            exit;
-        } else {
-            // Ocurrió un error al actualizar la contraseña
-            // Puedes mostrar un mensaje de error o hacer algo más
-            header('location: ./perfil.php'); // Redirecciona con mensaje de error si es necesario
-            exit;
-        }
-    }
-}
-?>
-
-<!-- Tu HTML para la página de cambiar contraseña -->
 
 <?php
 ob_end_flush();
 ?>
+<!-- Tu HTML para la página de cambiar contraseña -->
+
+
 

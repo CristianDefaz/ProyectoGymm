@@ -1,6 +1,7 @@
 <?php
 session_start();
 $codigousu = $_SESSION['codigo'];
+$cedula= $_SESSION['cedula'];
 $nombre = $_SESSION['nombre'];
 $apellido = $_SESSION['apellido'];
 $fechanacimiento = $_SESSION['fecha'];
