@@ -43,9 +43,9 @@ $mail->CharSet = 'UTF-8';
 //Port to connect smtp
 	$mail->Port = "587";
 //Set gmail username
-	$mail->Username = "cristiandefaz191@gmail.com";
+	$mail->Username = "";
 
-    $mail->Password = "comqnmjoxvarhpko";
+    $mail->Password = "";
 
 
     //Email subject
@@ -53,7 +53,7 @@ $mail->CharSet = 'UTF-8';
     $subject = utf8_decode($subject);
     $mail->Subject = $subject;
 //Set sender email
-$mail->setFrom("cristiandefaz191@gmail.com");
+$mail->setFrom("");
 //Enable HTML
 	$mail->isHTML(true);
 //Attachment
