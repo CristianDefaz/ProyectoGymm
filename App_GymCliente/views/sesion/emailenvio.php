@@ -1,8 +1,16 @@
 <?php
 session_start();
-$correo=$_SESSION['correo'];
-$nombre=$_SESSION['nombre'];
-$codigousu=$_SESSION['codigo'];
+$codigousu = $_SESSION['codigo'];
+$nombre = $_SESSION['nombre'];
+$apellido = $_SESSION['apellido'];
+$fechanacimiento = $_SESSION['fecha'];
+$genero = $_SESSION['genero'];
+$altura = $_SESSION['altura'];
+$peso = $_SESSION['peso'];
+$telefono = $_SESSION['telefono'];
+$direccion = $_SESSION['direccion'];
+$correo = $_SESSION['correo'];
+$contrasena = $_SESSION['contrasena'];
 $token = rand(1000,9999);
 $_SESSION['token']=$token;
 

@@ -128,11 +128,10 @@ if ($_POST) {
         $_SESSION['fecha'] = $fechanacimiento;
         $_SESSION['genero'] = $genero;
         $_SESSION['altura'] = $altura;
-        $_SESSION['apellido'] = $apellido;
-        $_SESSION['nombre'] = $nombre;
-        $_SESSION['apellido'] = $apellido;
-        $_SESSION['nombre'] = $nombre;
-        $_SESSION['apellido'] = $apellido;
+        $_SESSION['peso'] = $peso;
+        $_SESSION['telefono'] = $telefono;
+        $_SESSION['direccion'] = $direccion;
+        $_SESSION['correo'] = $correo;
         $_SESSION['contrasena'] = $contrasena;
     
 
