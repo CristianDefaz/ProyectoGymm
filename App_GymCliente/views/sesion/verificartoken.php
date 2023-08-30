@@ -42,15 +42,15 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                     <h4 class="text-center mb-4">Verificación para recuperacion de contraseña</h4>
-                                    <h6 class="text-center mb-4">Se a enviado un mensaje al siguiente correo: <?php echo $_SESSION['correo']; ?></h6>
+                                    <h6 class="text-center mb-4">Se ha enviado un mensaje al siguiente correo: <?php echo $_SESSION['correo']; ?></h6>
                                     <form class="user"  method="post" >
                                         <div class="form-group">
                                             <label><strong>Ingrese el codigo de verificación</strong></label>
-                                            <input type="text" placeholder="Codigo" class="form-control" name="veri" required>
+                                            <input type="text" placeholder="Codigo" class="form-control form-control-user" name="veri" required>
+                                            <div id="mensaje_contrasena"></div>
                                         </div>
-                                      
-                                        <input type="hidden" name="action" value="forgot_password">
-                                        <button type="submit" class="btn btn-primary mx-auto col-md-12">Verificar</button>
+                                  
+                                        <button type="submit" id="btnGuardar"  class="btn btn-primary btn-user btn-block">Verificar</button>
                                     </form>
                                     <hr>
                                     </div>
@@ -76,7 +76,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../../Plog/js/sb-admin-2.min.js"></script>
-
+   
 
     
 </body>
@@ -92,12 +92,10 @@ if (!empty($_POST)) {
         header('location: ./cambiarcontrasena.php');
     } else { ?>
         <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Codigo Incorrecto',
-                text: 'Ingrese el codigo correcto..'
-
-            })
+             const messageElement = document.getElementById('mensaje_contrasena');
+            let message = '';
+             message += 'Codigo Incorrecto.<br>';   
+             messageElement.innerHTML = message === '' ? '' : '<div style="color:red">' + message + '</div>';       
         </script>
 <?php }
 }

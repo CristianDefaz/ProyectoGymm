@@ -1,7 +1,7 @@
 <?php
 require_once '../../config/config.php';
 session_start();
-
+error_reporting();
 // Definir la función fuera de la clase
 function ActualizarContrasena($cliente_id, $nueva_contrasena) {
     $conexion = new ClaseConexion();
@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($resultado) {
             // Contraseña actualizada exitosamente
+
             header('location: ./login.php'); // Redirecciona a la página de inicio de sesión
             exit;
         } else {
@@ -60,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Custom styles for this template-->
     <link href="../../Plog/css/sb-admin-2.min.css" rel="stylesheet">
-
+    <link href="../../public/css/estilos.css" rel="stylesheet" type="text/css">
 </head>
 
 <body class="bg-gradient-primary">
@@ -82,15 +83,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-2">Olvidaste tu Contraseña</h1>
+                                        <h1 class="h4 text-gray-900 mb-2">Ingresa tu nueva Contraseña</h1>
                                         <p class="mb-4">Restaura tu contraseña</p>
                                     </div>
                                     <form class="user" method="post">
-        <div class="form-group">
-            <input type="password" class="form-control form-control-user" id="cli_contrasena" name="cli_contrasena" placeholder="Contraseña...">
-        </div>
-        <button type="submit" class="btn btn-primary mx-auto col-md-12">Cambiar</button>
-    </form>
+                                    <div class="form-group">
+                                            <div class="password-container">
+                                            <input type="password" class="form-control form-control-user" id="cli_contrasena" name="cli_contrasena" placeholder="Contraseña...">
+                                                <img src="https://static.vecteezy.com/system/resources/previews/002/101/686/large_2x/eye-icon-look-and-vision-symbol-eye-logo-design-inspiration-free-vector.jpg" alt="Imagen de contraseña" id="togglePassword">
+                                            </div>
+                                            <div id="mensaje_contrasena"></div>
+                                        </div>
+                                        <button type="submit" id="btnGuardar"  class="btn btn-primary btn-user btn-block">
+                                            Cambiar
+                                        </button>
+                                    </form>
                                     <hr>
 
                                 </div>
@@ -115,6 +122,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Custom scripts for all pages-->
     <script src="../../Plog/js/sb-admin-2.min.js"></script>
+    <script>
+            const passwordInput2 = document.getElementById('cli_contrasena');
+            const togglePassword = document.getElementById('togglePassword');
+            const messageElement2 = document.getElementById('mensaje_contrasena');
+
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                togglePassword.textContent = type === 'password' ? 'Mostrar contraseña' : 'Ocultar contraseña';
+            });
+
+
+            passwordInput.addEventListener('input', function() {
+                // Código de validación de contraseña (como se mostró en la respuesta anterior)
+            });
+        </script>
+
+        <script>
+            const passwordInput = document.getElementById('cli_contrasena');
+            const messageElement = document.getElementById('mensaje_contrasena');
+
+            passwordInput.addEventListener('input', function() {
+                const password = passwordInput.value;
+                const regexLowerCase = /[a-z]/;
+                const regexUpperCase = /[A-Z]/;
+                const regexNumbers = /[0-9]/;
+                const regexSpecialChars = /[!@#$%^&*()_+[\]{};':"\\|,.<>/?-]/;
+
+                let message = '';
+                    if (password.length < 1) {
+                        message += '';
+                        btnGuardar.disabled = true; // Bloquear el botón si no se ha ingresado contraseña
+                    } else if (password.length >= 8 &&
+                        regexLowerCase.test(password) &&
+                        regexUpperCase.test(password) &&
+                        regexNumbers.test(password) &&
+                        regexSpecialChars.test(password)) {
+                        message += 'Contraseña válida';
+                        btnGuardar.disabled = false; // Habilitar el botón si la contraseña es válida
+                    } else {
+                        message += 'La contraseña debe tener mínimo 8 caracteres, un carácter especial y una letra mayúscula.<br>';
+                        btnGuardar.disabled = true; // Bloquear el botón si la contraseña no cumple con los requisitos
+                    }
+
+                messageElement.innerHTML = message === '' ? '' : '<div style="color:red">' + message + '</div>';
+            });
+        </script>
  
 </body>
 </html>

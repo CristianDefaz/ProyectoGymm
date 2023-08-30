@@ -46,7 +46,7 @@
                                     </div>
                                     <form class="user"  method="post" >
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" id="cli_email" name="cli_email" aria-describedby="emailHelp" placeholder="Enter Email Address..." required>
+                                            <input type="email" class="form-control form-control-user" id="cli_email" name="cli_email" aria-describedby="emailHelp" placeholder="Ingresa tu email...." required>
                                         </div>
                                       
                                         <input type="hidden" name="action" value="forgot_password">
