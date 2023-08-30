@@ -1,5 +1,7 @@
-
-
+<?php
+ob_start();
+?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,13 +48,10 @@
                                     </div>
                                     <form class="user"  method="post" >
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" id="cli_email" name="cli_email" aria-describedby="emailHelp" placeholder="Enter Email Address..." required>
+                                        <input type="password" class="form-control form-control-user" id="cli_contrasena" name="cli_contrasena" placeholder="Contraseña...">
                                         </div>
-                                      
                                         <input type="hidden" name="action" value="forgot_password">
-                                        <button class="btn btn-primary btn-user btn-block" type="submit">
-                                            Recuperar contraseña
-                                        </button>
+                                        <button type="submit" class="btn btn-primary mx-auto col-md-12">Cambiar</button>
                                     </form>
                                     <hr>
 
@@ -78,73 +77,43 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../../Plog/js/sb-admin-2.min.js"></script>
-
-
-    
+ 
 </body>
-
 </html>
-
 <?php
-require_once '../../config/config.php';
-require_once '../../config/sesiones.php';
 
-// Definir la función fuera de la clase
-function ConsultaRecuperarPass($correo) {
-    $con = new ClaseConexion();
-    $con = $con->ProcedimientoConectar();
-    $query = "SELECT * FROM cliente WHERE cli_email = '$correo'";
-    $result = $con->query($query);
 
-    return $result;
-}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $cliente_id = $_SESSION['codigo']; // Obtén el ID del cliente desde la sesión
+    $nueva_contrasena = $_POST['cli_contrasena'];
 
-// Tu código de conexión a la base de datos y otras importaciones
+    // Realiza el proceso de actualización de contraseña aquí
+    if ($cliente_id && $nueva_contrasena) {
+        $nueva_contrasena_hashed = password_hash($nueva_contrasena, PASSWORD_DEFAULT);
 
-if ($_POST) {
-    $correo = $_POST['cli_email'];
-    $result_cor = ConsultaRecuperarPass($correo); // Llamar a la función sin usar $clase_clave
+        // Realiza la actualización en la base de datos
+        $conexion = new ClaseConexion();
+        $con = $conexion->ProcedimientoConectar();
+        $query = "UPDATE cliente SET cli_contrasena = '$nueva_contrasena_hashed' WHERE cliente_id = '$cliente_id'";
+        $resultado = $con->query($query);
 
-    if ($result_cor->num_rows > 0) {
-        $row = mysqli_fetch_array($result_cor);
-
-        $codigousu = $row['cliente_id'];
-        $cedula = $row['cli_cedula'];
-        $nombre = $row['cli_nombre'];
-        $apellido = $row['cli_apellido'];
-        $fechanacimiento = $row['cli_fecha_nacimiento'];
-        $genero = $row['cli_genero'];
-        $altura = $row['cli_altura'];
-        $peso = $row['cli_peso'];
-        $telefono = $row['cli_telefono'];
-        $direccion = $row['cli_direccion'];
-        $correo = $row['cli_email'];
-        $contrasena = $row['cli_contrasena'];
-
-        // Establecer variables de sesión
-        $_SESSION['codigo'] = $codigousu;
-        $_SESSION['nombre'] = $nombre;
-        $_SESSION['apellido'] = $apellido;
-        $_SESSION['fecha'] = $fechanacimiento;
-        $_SESSION['genero'] = $genero;
-        $_SESSION['altura'] = $altura;
-        $_SESSION['apellido'] = $apellido;
-        $_SESSION['nombre'] = $nombre;
-        $_SESSION['apellido'] = $apellido;
-        $_SESSION['nombre'] = $nombre;
-        $_SESSION['apellido'] = $apellido;
-        $_SESSION['contrasena'] = $contrasena;
-    
-
-        // Redireccionar a la página de envío de correo para recuperación
-        header('location: ./emailenvio.php');
-        exit; // Importante: asegúrate de salir del script
-    } else {
-        // El correo no existe en la base de datos
-        // Puedes mostrar un mensaje de error o hacer algo más
-        // Redireccionar a la página de inicio de sesión, por ejemplo
-        header('location: ./login.php');
-        exit; // Asegúrate de salir del script
+        if ($resultado) {
+            // Contraseña actualizada exitosamente
+            header('location: ./login.php'); // Redirecciona a la página de perfil o a donde desees
+            exit;
+        } else {
+            // Ocurrió un error al actualizar la contraseña
+            // Puedes mostrar un mensaje de error o hacer algo más
+            header('location: ./perfil.php'); // Redirecciona con mensaje de error si es necesario
+            exit;
+        }
     }
 }
 ?>
+
+<!-- Tu HTML para la página de cambiar contraseña -->
+
+<?php
+ob_end_flush();
+?>
+
