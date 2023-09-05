@@ -61,20 +61,42 @@ switch ($_GET['op']) {
                 }
                 echo json_encode($todos);
                 break;
-    case 'insertar':
-        $cedula = $_POST['cli_cedula'];
-        $Nombres = $_POST['cli_nombre'];
-        $Apellidos = $_POST['cli_apellido'];
-        $fechanacimiento = $_POST['cli_fecha_nacimiento'];
-        $genero = $_POST['cli_genero'];
-        $altura = $_POST['cli_altura'];
-        $peso = $_POST['cli_peso'];
-        $telefono = $_POST['cli_telefono'];
-        $direccion = $_POST['cli_direccion'];
-        $correo = $_POST['cli_email'];
-        $contrasena = $_POST['cli_contrasena'];
-        $datos = array();
-        $datos = $Cliente->InsertarR($cedula, $Nombres, $Apellidos, $fechanacimiento, $genero, $altura, $peso, $telefono, $direccion,$correo,$contrasena);
-        echo json_encode($datos);
-        
+
+
+
+
+                case 'insertar':
+                    $cedula = $_POST['cli_cedula'];
+                    $Nombres = $_POST['cli_nombre'];
+                    $Apellidos = $_POST['cli_apellido'];
+                    $fechanacimiento = $_POST['cli_fecha_nacimiento'];
+                    $genero = $_POST['cli_genero'];
+                    $altura = $_POST['cli_altura'];
+                    $peso = $_POST['cli_peso'];
+                    $telefono = $_POST['cli_telefono'];
+                    $direccion = $_POST['cli_direccion'];
+                    $correo = $_POST['cli_email'];
+                    $contrasena = $_POST['cli_contrasena'];
+                    $empleado = $_POST['id_empleado'];
+                    
+                    // Inserta al cliente en la base de datos
+                    $datos = $Cliente->InsertarR($cedula, $Nombres, $Apellidos, $fechanacimiento, $genero, $altura, $peso, $telefono, $direccion, $correo, $contrasena, $empleado);
+                
+                    if ($datos) {
+                        // Envía el correo de bienvenida
+                        $to = $correo;
+                        $subject = "Bienvenido a Evolution Gym";
+                        $message = "Hola $Nombres,\n\nBienvenido a Evolution Gym. ¡Gracias por registrarte!";
+                        $headers = "From: cristiandefaz191@gmail.com"; // Reemplaza con tu dirección de correo
+                
+                        // Envía el correo
+                        if (mail($to, $subject, $message, $headers)) {
+                            echo json_encode($datos);
+                        } else {
+                            echo json_encode(["result" => "error_mail"]);
+                        }
+                    } else {
+                        echo json_encode(["result" => "error_db"]);
+                    }
+                    break;
 }

@@ -105,6 +105,7 @@
                                 </div>
                                 <div id="mensaje_contrasena"></div>
                             </div>
+                            <input type="hidden" name="id_empleado" id="id_empleado" value="60" readonly required>
                                 </div>
                                     <div class="modal-footer">
                                     <button type="submit"   class="btn btn-primary" id="btnGuardar" disabled>Guardar</button>
