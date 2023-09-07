@@ -35,6 +35,7 @@ var cargartablaF = () => {
         
         html +=
           `<button class='btn btn-success' onclick='uno(${facturas.factura_id})'>Editar</button>` +
+          `<button class="btn btn-dark" onclick='guardarDatos(${facturas.factura_id})'>Enviar recibo</button>` +
           `<a class="btn btn-info" href="imprimir.php?id=${facturas.factura_id}" target="_blank">Imprimir Factura</a>` +
           `</td>` +
           `</tr>`;

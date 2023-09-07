@@ -2,9 +2,9 @@
 include_once('../../config/sesiones.php');
 if (isset($_SESSION["em_id"])) {
     $_SESSION["ruta"] = "Factura";
-    
+
     $rol_id = $_SESSION['rol_id'];
-   
+
 ?>
     <!DOCTYPE html>
     <html lang="es">
@@ -41,7 +41,7 @@ if (isset($_SESSION["em_id"])) {
                                         <!-- BUSCADOR -->
 
                                         <div class="form-group">
-                                            
+
                                             <div class="input-group">
                                                 <input type="text" name="buscarInput" id="buscarInput" placeholder="Busqueda por Cédula, Apellido o Tipo de membresia" class="form-control" required>
                                                 <div class="input-group-append">
@@ -51,8 +51,8 @@ if (isset($_SESSION["em_id"])) {
                                                 </div>
                                             </div>
                                         </div>
-                                         <!-- END BUSCADOR -->
-                                         <input type="hidden" id="rolId" value="<?php echo $rol_id; ?>">
+                                        <!-- END BUSCADOR -->
+                                        <input type="hidden" id="rolId" value="<?php echo $rol_id; ?>">
                                         <table class="table table-bordered table-striped table-responsive">
                                             <thead>
                                                 <tr>
@@ -98,7 +98,7 @@ if (isset($_SESSION["em_id"])) {
                         </button>
 
                     </div>
-                    
+
                     <form id="Facturas_form">
                         <div class="modal-body">
                             <input type="hidden" name="factura_id" id="factura_id">
@@ -108,26 +108,26 @@ if (isset($_SESSION["em_id"])) {
                                 <select name="cli_id" id="cli_id" class="form-control">
                                 </select>
                             </div>
-                                <div class="form-group">
-                                    <label for="fa_fecha" class="control-label">Fecha</label>
-                                    <input type="date" name="fa_fecha" id="fa_fecha" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="men_id" class="control-label">Membresia</label>
-                                    <select onchange="calcularvalor(this)" name="men_id" id="men_id" class="form-control">
-                                    </select>
-                                </div>
-                                    <div class="form-group">
-                                        <label for="fa_montol_total" class="control-label">Valor a Pagar "$"</label>
-                                        <input type="text" name="fa_montol_total" id="fa_montol_total" class="form-control" readonly />                                      
-                                    </div>
-                                    <input type="hidden" name="id_empleado" id="id_empleado" value="">
+                            <div class="form-group">
+                                <label for="fa_fecha" class="control-label">Fecha</label>
+                                <input type="date" name="fa_fecha" id="fa_fecha" class="form-control" required>
                             </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Guardar</button>
-                                        <button type="button" class="btn btn-secondary" onclick="limpiar()" data-dismiss="modal">Cerrar</button>
-                                       
-                                    </div>
+                            <div class="form-group">
+                                <label for="men_id" class="control-label">Membresia</label>
+                                <select onchange="calcularvalor(this)" name="men_id" id="men_id" class="form-control">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="fa_montol_total" class="control-label">Valor a Pagar "$"</label>
+                                <input type="text" name="fa_montol_total" id="fa_montol_total" class="form-control" readonly />
+                            </div>
+                            <input type="hidden" name="id_empleado" id="id_empleado" value="">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" onclick="guardarDatos()">Guardar</button>
+                            <button type="button" class="btn btn-secondary" onclick="limpiar()" data-dismiss="modal">Cerrar</button>
+
+                        </div>
                     </form>
 
                 </div>
@@ -135,7 +135,7 @@ if (isset($_SESSION["em_id"])) {
         </div>
 
         <!-- Imprimir Modal -->
-        <div class="modal fade"  id="modalFacturaImprimir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="modalFacturaImprimir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <style>
@@ -157,25 +157,25 @@ if (isset($_SESSION["em_id"])) {
 
                             <div class="form-group">
                                 <label for="cli_id" id="DatosCliente" class="control-label">Datos Cliente</label>
-                               
+
                             </div>
 
                             <div class="form-group">
                                 <label for="fa_fecha" id="Fecha" class="control-label">Fecha</label>
-                               
+
                             </div>
                             <div class="form-group">
                                 <label for="men_id" id="Membresia" class="control-label">Membresia</label>
-                       
+
 
                             </div>
                             <div class="form-group">
                                 <label for="fa_montol_total" id="ValoraPagar" class="control-label">Valor a Pagar</label>
-                                
+
 
                             </div>
                             <div class="modal-footer">
-                     
+
                                 <button type="button" class="btn btn-secondary no-imprimir" onclick="limpiar()" data-dismiss="modal">Cerrar</button>
                             </div>
                     </form>
@@ -190,28 +190,48 @@ if (isset($_SESSION["em_id"])) {
 
         <!--scripts-->
         <?php include_once('../html/scripts.php')  ?>
-        
+
         <script src="./Facturas.js"></script>
         <script>
-    function busqueda() {
-        var buscar = document.getElementById("buscarInput").value;
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("TablaFactura").innerHTML = this.responseText;
-            }
-        };
-        xmlhttp.open("GET", "facturas.busqueda.php?buscar=" + buscar, true);
-        xmlhttp.send();
-    }
-</script>
-        <script>
-    // Obtén el valor de $_SESSION['em_id'] y asígnalo a la variable idEmpleado
-    var idEmpleado = "<?php echo isset($_SESSION['em_id']) ? $_SESSION['em_id'] : ''; ?>";
+            function guardarDatos(factura_id) {
+                // Obtener los valores de los campos del formulario
+                
 
-    // Asigna el valor de idEmpleado al input oculto
-    document.getElementById('id_empleado').value = idEmpleado;
-</script>
+                // Realizar una solicitud AJAX para ejecutar el archivo PHP
+                $.ajax({
+                    type: "POST",
+                    url: "./facturas.mail.php",
+                    data: {
+                       
+                        factura_id: factura_id // Pasa factura_id como parámetro
+                    },
+                    success: function(response) {
+                        // Manejar la respuesta del archivo PHP si es necesario
+                        console.log(response);
+                    }
+                });
+            }
+        </script>
+        <script>
+            function busqueda() {
+                var buscar = document.getElementById("buscarInput").value;
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("TablaFactura").innerHTML = this.responseText;
+                    }
+                };
+                xmlhttp.open("GET", "facturas.busqueda.php?buscar=" + buscar, true);
+                xmlhttp.send();
+            }
+        </script>
+        <script>
+            // Obtén el valor de $_SESSION['em_id'] y asígnalo a la variable idEmpleado
+            var idEmpleado = "<?php echo isset($_SESSION['em_id']) ? $_SESSION['em_id'] : ''; ?>";
+
+            // Asigna el valor de idEmpleado al input oculto
+            document.getElementById('id_empleado').value = idEmpleado;
+        </script>
 
     </body>
 
