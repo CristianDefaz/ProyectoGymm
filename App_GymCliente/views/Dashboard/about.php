@@ -3,6 +3,55 @@
 
 <head>
 <?php require_once('../html/head.php')  ?>
+<style>
+        .center-text {
+            text-align: center;
+            color: white;
+        }
+
+        /* Estilos para el botón de redes sociales */
+        .social-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #bc2a8d;
+            /* Color de Facebook */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* Estilos específicos para el botón de Facebook */
+        .facebook {
+            background-color: #1877f2;
+            /* Color de Facebook */
+        }
+
+
+        /* Estilos para el botón cuando se coloca el cursor encima (hover) */
+        .social-button:hover {
+            background-color: #345187;
+            /* Cambiar color al pasar el cursor */
+        }
+
+        .social-button-wrapper {
+            margin: 10px;
+            /* Agregar margen si es necesario */
+            text-align: center;
+            /* Centrar el botón en el div */
+        }
+
+        hr {
+            border: none;
+            /* Quita la línea predeterminada */
+            border-top: 2px solid #000;
+            /* Color y grosor de la línea */
+            margin: 20px 0;
+            /* Espacio superior e inferior */
+        }
+    </style>
+
+
 </head>
 
 <body class="bg-white">
@@ -44,11 +93,29 @@
                         <p>Nuestro Gymnasio esta entre los mejores de la provincia</p>
                     </div>
                 </div>
-                <a href="https://estudiarcoachingdeportivo.es/maquinas-de-gimnasio/" class="btn btn-lg px-4 btn-outline-primary">Mas Informacion</a>
+                <a class="btn btn-outline-primary mt-2 px-3" href="https://estudiarcoachingdeportivo.es/maquinas-de-gimnasio/"target="_blank">Mas Información <i class="fa fa-angle-right"></i></a>
             </div>
         </div>
     </div>
     <!-- About End -->
+
+    <hr>
+    <!-- sponsor Start -->
+
+    <div class="social-button-wrapper">
+        <h2 class="display-4 font-weight-bold mb-4">Redes sociales</h2>
+        <h3> Siguenos en nuestras redes sociales para conocer mas sobre la experiencia en Energy Gym</h3>
+        <a href="https://www.facebook.com/profile.php?id=100065366085639" target="_blank" class="social-button facebook">
+            <i class="fab fa-facebook-f"></i> Energy Gym
+        </a>
+        <a href="https://www.instagram.com/reto_evolution/" target="_blank" class="social-button">
+            <i class="fab fa-instagram"></i> Energy Gym
+        </a>
+
+    </div>
+
+    <!-- sponsor End -->
+    <hr>
 
 
    <!-- Features Start -->

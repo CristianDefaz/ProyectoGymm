@@ -1,6 +1,7 @@
 <?php
 
 error_reporting(0);
+
 // Obtener las fechas y el valor desde la URL
 $fechaDesde = $_GET['fechaDesde'];
 $fechaHasta = $_GET['fechaHasta'];
@@ -78,6 +79,7 @@ if ($resultado) {
 }
 
 mysqli_close($mysqli);
+
 
 $response = array(
     'fa_fecha' => $fa_fecha,

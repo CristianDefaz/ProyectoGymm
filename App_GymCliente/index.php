@@ -25,12 +25,62 @@
             text-align: center;
             color: white;
         }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            /* Esto asegura que el cuerpo ocupe el 100% de la altura de la ventana (viewport) */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Estilos para el contenido */
+        .container {
+            flex-grow: 1;
+            /* Esto permite que el contenido crezca y ocupe el espacio restante en la ventana */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Estilos para el modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-contenido {
+    display: block;
+    margin: 0 auto;
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.cerrar {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+ 
     </style>
 </head>
 
 <body class="bg-white">
- <!-- Navbar Start -->
-<div class="container-fluid p-0 nav-bar">
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0 nav-bar">
         <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
             <a href="" class="navbar-brand">
                 <h1 class="m-0 display-4 font-weight-bold text-uppercase text-white">Gymnast</h1>
@@ -52,6 +102,8 @@
         </nav>
     </div>
     <!-- Navbar End -->
+
+    
 
     <!-- Carousel Start -->
     <div class="container-fluid p-0">
@@ -84,6 +136,10 @@
     </div>
     <!-- Carousel End -->
 
+    
+
+
+
 
     <!-- Gym Class Start -->
     <div class="container gym-class mb-5">
@@ -93,7 +149,7 @@
                     <i class="flaticon-six-pack"></i>
                     <h3 class="display-4 mb-3 text-white font-weight-bold">MISIÓN</h3>
                     <p class="text-justify">
-                    "Proporcionar un ambiente inspirador y motivador que promueva un estilo de vida saludable y activo,
+                        "Proporcionar un ambiente inspirador y motivador que promueva un estilo de vida saludable y activo,
                         ofreciendo instalaciones de calidad, entrenamientos personalizados y programas de acondicionamiento
                         físico para personas de todas las edades y niveles de condición física. Nuestra misión es ayudar a nuestros
                         miembros a alcanzar sus objetivos de bienestar, fomentando la salud, la felicidad y el bienestar general."
@@ -105,7 +161,7 @@
                     <i class="flaticon-bodybuilding"></i>
                     <h3 class="display-4 mb-3 text-white font-weight-bold">VISIÓN</h3>
                     <p class="text-justify">
-                    "Nos esforzamos por convertirnos en el gimnasio líder en nuestra comunidad y más allá, reconocidos por nuestra
+                        "Nos esforzamos por convertirnos en el gimnasio líder en nuestra comunidad y más allá, reconocidos por nuestra
                         excelencia en servicios, innovación en programas de acondicionamiento físico y la creación de un ambiente amigable
                         y acogedor para nuestros miembros. Nuestra visión es ser el destino preferido para aquellos que buscan mejorar su
                         salud y forma física, brindando resultados tangibles y sostenibles a largo plazo para todos nuestros clientes y miembros."
@@ -117,15 +173,23 @@
     <!-- Gym Class End -->
 
 
-     <!-- Features Start -->
-     <div class="container-fluid my-5">
+    <!-- Promo Start -->
+    <div class="container">
+        <h1 class="text-center">Nuestras membresias</h1>
+        <img src="./public/img/Red White And Black Modern Fitness and Gym Center Instagram Post.gif" alt="Mi GIF" class="centered-gif">
+    </div>
+    <!-- Promo End -->
+
+
+    <!-- Features Start -->
+    <div class="container-fluid my-5">
         <div class="row">
             <div class="col-lg-4 p-0">
                 <div class="d-flex align-items-center bg-secondary text-white px-5" style="min-height: 300px;">
                     <i class="flaticon-training display-3 text-primary mr-3"></i>
                     <div class="">
                         <h2 class="text-white mb-3">Progreso</h2>
-                        <p> Organiza tu horario para tus ejercicios 
+                        <p> Organiza tu horario para tus ejercicios
                         </p>
                     </div>
                 </div>
@@ -135,7 +199,7 @@
                     <i class="flaticon-weightlifting display-3 text-secondary mr-3"></i>
                     <div class="">
                         <h2 class="text-white mb-3">Rutinas de ejercicios</h2>
-                        <p>Siempre es bueno empezar calentando 
+                        <p>Siempre es bueno empezar calentando
                         </p>
                     </div>
                 </div>
@@ -156,83 +220,8 @@
 
 
 
-        <!-- Team Start -->
-    <div class="container pt-5 team">
-        <div class="d-flex flex-column text-center mb-5">
-            <h4 class="text-primary font-weight-bold">Nuestros Entrenadores</h4>
-            <h4 class="display-4 font-weight-bold">Conoce a Nuestros Entrenadores Expertos</h4>
-        </div>
-        <div class="row">
-            <div class="col-lg-3 col-md-6 mb-5">
-                <div class="card border-0 bg-secondary text-center text-white">
-                    <img class="card-img-top" src="img/team-1.jpg" alt="">
-                    <div class="card-social d-flex align-items-center justify-content-center">
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                    <div class="card-body bg-secondary">
-                        <h4 class="card-title text-primary">Juan Perez</h4>
-                        <p class="card-text">Entrenador</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <div class="card border-0 bg-secondary text-center text-white">
-                    <img class="card-img-top" src="img/team-2.jpg" alt="">
-                    <div class="card-social d-flex align-items-center justify-content-center">
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                    <div class="card-body bg-secondary">
-                        <h4 class="card-title text-primary">Trainer Name</h4>
-                        <p class="card-text">Entrenador</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <div class="card border-0 bg-secondary text-center text-white">
-                    <img class="card-img-top" src="img/team-3.jpg" alt="">
-                    <div class="card-social d-flex align-items-center justify-content-center">
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                    <div class="card-body bg-secondary">
-                        <h4 class="card-title text-primary">Trainer Name</h4>
-                        <p class="card-text">Entrenador</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <div class="card border-0 bg-secondary text-center text-white">
-                    <img class="card-img-top" src="img/team-4.jpg" alt="">
-                    <div class="card-social d-flex align-items-center justify-content-center">
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                    <div class="card-body bg-secondary">
-                        <h4 class="card-title text-primary">Trainer Name</h4>
-                        <p class="card-text">Entrenador</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Team End -->
 
 
-    
-
-  
-
-     
     <!-- BMI Calculation Start -->
     <div class="container-fluid position-relative bmi my-5">
         <div class="container">
@@ -253,7 +242,7 @@
                                     <input type="text" id="weight" class="form-control form-control-lg bg-dark text-white" placeholder="Peso (KG)">
                                 </div>
                                 <div class="col form-group">
-                                    <input type="text" id="height" class="form-control form-control-lg bg-dark text-white" placeholder="Altura (CM)">
+                                    <input type="text" id="height" class="form-control form-control-lg bg-dark text-white" placeholder="Altura (M)">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -285,7 +274,7 @@
 
 
     <!-- Testimonial Start -->
-   <!-- <div class="container-fluid position-relative testimonial my-5">
+    <!-- <div class="container-fluid position-relative testimonial my-5">
         <div class="container">
             <div class="row px-3 align-items-center">
                 <div class="col-md-6 bg-secondary">
@@ -349,8 +338,8 @@
     </div> -->
     <!-- Testimonial End -->
 
-  <!-- Blog Start -->
-  <div class="container pt-5">
+    <!-- Blog Start -->
+    <div class="container pt-5">
         <div class="d-flex flex-column text-center mb-5">
             <h4 class="text-primary font-weight-bold">Nuestros Blogs</h4>
             <h4 class="display-4 font-weight-bold">Articulos Destacados</h4>
@@ -373,7 +362,7 @@
                     </div>
                 </div>
                 <p class="text-justify">La alimentación juega un papel fundamental en nuestra salud y bienestar. Una dieta equilibrada y nutritiva no solo nos proporciona la energía necesaria para llevar a cabo nuestras actividades diarias, sino que también es esencial para prevenir enfermedades y mantener un estilo de vida saludable. A continuación</p>
-                <a class="btn btn-outline-primary mt-2 px-3" href="./blog.php">Mas Información <i class="fa fa-angle-right"></i></a>
+                <a class="btn btn-outline-primary mt-2 px-3" href="./views/Dashboard/nosesion/blog.php">Mas Información <i class="fa fa-angle-right"></i></a>
             </div>
             <div class="col-lg-6 mb-5 blog-item">
 
@@ -392,15 +381,25 @@
                     </div>
                 </div>
                 <p class="text-justify">El ejercicio físico regular no solo es esencial para mantener un cuerpo en forma, sino que también tiene un impacto profundo en nuestra salud mental y emocional. Desde la mejora de la condición cardiovascular hasta la reducción del estrés, los beneficios del ejercicio son numerosos y variados.</p>
-                <a class="btn btn-outline-primary mt-2 px-3" href="./blog.php">Mas Información <i class="fa fa-angle-right"></i></a>
+                <a class="btn btn-outline-primary mt-2 px-3" href="./views/Dashboard/nosesion/blog.php">Mas Información <i class="fa fa-angle-right"></i></a>
             </div>
         </div>
     </div>
     <!-- Blog End -->
 
+    <!-- Modal -->
+    <div id="miModal" class="modal">
+        <span class="cerrar" id="cerrarModal">&times;</span>
+        <img class="modal-contenido" src="./public/img/Red and White Modern Gym & Fitness Instagram Post.png" alt="Imagen">
+    </div>
+    <!-- modal-->
+
+
+
 
     <!-- Footer Start -->
     <?php include_once('./views/html/footer.php') ?>
+    <script src="script.js"></script>
     <!-- Footer End -->
     <!-- Calcular ICM-->
     <script>
@@ -447,7 +446,7 @@
         });
     </script>
 
-    <!-- Fin-->
+
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-outline-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>

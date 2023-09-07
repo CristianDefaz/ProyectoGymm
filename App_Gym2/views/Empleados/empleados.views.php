@@ -39,7 +39,7 @@ if (isset($_SESSION["em_id"])) {
                                         <!-- BUSCADOR -->
 
                                         <div class="form-group">
-                                            
+
                                             <div class="input-group">
                                                 <input type="text" name="buscarInput" id="buscarInput" placeholder="Busqueda por Cedula o Apellido" class="form-control" required>
                                                 <div class="input-group-append">
@@ -49,7 +49,7 @@ if (isset($_SESSION["em_id"])) {
                                                 </div>
                                             </div>
                                         </div>
-                                         <!-- END BUSCADOR -->
+                                        <!-- END BUSCADOR -->
 
                                         <table class="table table-bordered table-striped table-responsive">
                                             <thead>
@@ -120,13 +120,13 @@ if (isset($_SESSION["em_id"])) {
                                 <input type="mail" name="em_correo" id="em_correo" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                    <label for="em_contrasena" class="control-label">Contraseña</label>
-                                    <div class="password-container">
-                                        <input type="password" name="em_contrasena" id="em_contrasena" class="form-control" required>
-                                        <img src="https://static.vecteezy.com/system/resources/previews/002/101/686/large_2x/eye-icon-look-and-vision-symbol-eye-logo-design-inspiration-free-vector.jpg" alt="Imagen de contraseña" id="togglePassword">
-                                    </div>
-                                    <div id="mensaje_contrasena"></div>
+                                <label for="em_contrasena" class="control-label">Contraseña</label>
+                                <div class="password-container">
+                                    <input type="password" name="em_contrasena" id="em_contrasena" class="form-control" required>
+                                    <img src="https://static.vecteezy.com/system/resources/previews/002/101/686/large_2x/eye-icon-look-and-vision-symbol-eye-logo-design-inspiration-free-vector.jpg" alt="Imagen de contraseña" id="togglePassword">
                                 </div>
+                                <div id="mensaje_contrasena"></div>
+                            </div>
                             <div class="form-group">
                                 <label for="rol_id" class="control-label">Rol</label>
                                 <select name="rol_id" id="rol_id" class="form-control">
@@ -134,7 +134,9 @@ if (isset($_SESSION["em_id"])) {
                             </div>
                         </div>
                         <div class="modal-footer">
+
                             <button type="submit" class="btn btn-primary" id="btnGuardar" disabled>Guardar</button>
+
                             <button type="button" class="btn btn-secondary" onclick="limpiar()" data-dismiss="modal">Cerrar</button>
                         </div>
                     </form>
@@ -179,6 +181,7 @@ if (isset($_SESSION["em_id"])) {
         <script>
             const passwordInput = document.getElementById('em_contrasena');
             const messageElement = document.getElementById('mensaje_contrasena');
+            const guardarButton = document.getElementById('btnGuardar');
 
             passwordInput.addEventListener('input', function() {
                 const password = passwordInput.value;
@@ -188,18 +191,23 @@ if (isset($_SESSION["em_id"])) {
                 const regexSpecialChars = /[!@#$%^&*()_+[\]{};':"\\|,.<>/?-]/;
 
                 let message = '';
+                let isPasswordSecure = true;
+
                 if (password.length > 1) {
                     if (!regexLowerCase.test(password) || !regexUpperCase.test(password) || !regexNumbers.test(password) ||
                         !regexSpecialChars.test(password) || password.length < 8) {
-                        message += 'La contraseña debe tener minimo 8 caracteres, un caracter especial y una letra mayúscula.<br>';
+                        message += 'La contraseña debe tener al menos 8 caracteres, un carácter especial y una letra mayúscula.<br>';
+                        isPasswordSecure = false;
                     }
                 } else if (password.length < 1) {
                     message += '';
+                    isPasswordSecure = false;
                 }
 
-
-
                 messageElement.innerHTML = message === '' ? '' : '<div style="color:red">' + message + '</div>';
+
+                // Habilita o deshabilita el botón de guardar según la seguridad de la contraseña
+                guardarButton.disabled = !isPasswordSecure;
             });
         </script>
 
@@ -304,8 +312,8 @@ if (isset($_SESSION["em_id"])) {
 
             /*-------------------------------------------------------------FIN------------------------------------*/
         </script>
-        
-        
+
+
         <script>
             var cedulaInput = document.getElementById("em_cedula");
             var cedulaError = document.getElementById("cedulaError");

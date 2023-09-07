@@ -10,6 +10,8 @@ if (isset($_SESSION["em_id"])) {
 
     <head>
         <?php require_once('../html/head.php')  ?>
+        <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
     </head>
 
     <body id="page-top">
@@ -29,9 +31,13 @@ if (isset($_SESSION["em_id"])) {
                             <h1 class="h3 mb-0 text-gray-800"><?php echo $_SESSION["ruta"] ?></h1>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12 mb-4">
 
-                                <div class="card shadow mb-4">
+                            <div class="col-lg-12 mb-4">
+                                <button class='btn btn-info no-imprimir' id="btn" type='button'>
+                                    Imprimir
+                                </button>
+
+                                <div class="card shadow mb-4" id="imprimir">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <label class="input-group-text" for="fechaDesdeInput">Fecha Desde:</label>
@@ -71,6 +77,9 @@ if (isset($_SESSION["em_id"])) {
                                                 <input type="text" id="sumaMontosInput" class="form-control form-control-lg" readonly>
                                             </div>
                                         </div>
+                                        <div class="container mt-5" id="resultadoContainer">
+                                            <!-- Aquí se mostrará la respuesta -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -80,9 +89,7 @@ if (isset($_SESSION["em_id"])) {
                 <div>
 
                 </div>
-                <div class="container mt-5" id="resultadoContainer">
-                    <!-- Aquí se mostrará la respuesta -->
-                </div>
+
 
                 <!-- Footer -->
                 <?php include_once('../html/footer.php') ?>
@@ -103,42 +110,67 @@ if (isset($_SESSION["em_id"])) {
 
         <script src="./Tablamonto.js"></script>
         <script>
-function consulta() {
-    // Obtener las fechas desde los campos de entrada
-    var fechaDesde = document.getElementById("fechaDesdeInput").value;
-    var fechaHasta = document.getElementById("fechaHastaInput").value;
+            document.addEventListener("DOMContentLoaded", function() {
+                // Tu código JavaScript aquí
+                var divToCapture = document.getElementById("imprimir");
 
-    // Enviar las fechas a un archivo PHP usando AJAX
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            // La respuesta del archivo PHP se recibe como JSON, así que la parseamos
-            var response = JSON.parse(this.responseText);
-            
-            // Obtener el contenedor donde se mostrará la respuesta
-            var resultadoContainer = document.getElementById("resultadoContainer");
-            
-            // Crear el contenido HTML que deseas mostrar
-            var contenidoHTML = '<form><div class="mb-3">';
-            contenidoHTML += '<label for="campo1" class="form-label">Dia que mas se vendió:</label>';
-            contenidoHTML += '<input type="text" class="form-control" id="campo1" value="' + response.fa_fecha + '"></div>';
-            contenidoHTML += '<div class="mb-3"><label for="campo2" class="form-label">Numero de membresias vendidas</label>';
-            contenidoHTML += '<input type="text" class="form-control" id="campo2" value="' + response.numero_de_membresias + '"></div>';
-            contenidoHTML += '<div class="mb-3"><label for="campo3" class="form-label">Membresia mas vendida</label>';
-            contenidoHTML += '<input type="text" class="form-control" id="campo3" value="' + response.tipo_menbresia + '">';
-            contenidoHTML += '<div class="mb-3"><label for="campo3" class="form-label">Cantidad</label>';
-            contenidoHTML += '<input type="text" class="form-control" id="campo4" value="' + response.cantidad_vendida + '"></div>';
-            contenidoHTML += '<div class="mb-3"><label for="campo4" class="form-label">Promedio de ventas</label>';
-            contenidoHTML += '<input type="text" class="form-control" id="campo5" value="' + response.promedioMontos + '"></div></form>';
-            
-            // Insertar el contenido HTML en el contenedor
-            resultadoContainer.innerHTML = contenidoHTML;
-        }
-    };
-    xhttp.open("GET", "TablaMonto.res.php?fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta, true);
-    xhttp.send();
-}
-</script>
+                document.getElementById("btn").addEventListener("click", function() {
+
+                    html2canvas(document.getElementById("imprimir")).then(canvas => {
+                        //   document.body.appendChild(canvas)
+                        var newWindow = window.open("", "_blank");
+                        // Agregar el canvas a la nueva ventana
+                        newWindow.document.body.appendChild(canvas);
+                        newWindow.print();
+                        newWindow.close();
+
+                    });;
+                    /*html2canvas(divToCapture).then(function(canvas) {
+                        var screenshotUrl = canvas.toDataURL("image/png");
+
+                        var screenshotImg = document.getElementById("screenshotImg");
+                        screenshotImg.src = screenshotUrl;
+                        screenshotImg.style.display = "block";
+                    });*/
+                });
+            });
+        </script>
+        <script>
+            function consulta() {
+                // Obtener las fechas desde los campos de entrada
+                var fechaDesde = document.getElementById("fechaDesdeInput").value;
+                var fechaHasta = document.getElementById("fechaHastaInput").value;
+
+                // Enviar las fechas a un archivo PHP usando AJAX
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // La respuesta del archivo PHP se recibe como JSON, así que la parseamos
+                        var response = JSON.parse(this.responseText);
+
+                        // Obtener el contenedor donde se mostrará la respuesta
+                        var resultadoContainer = document.getElementById("resultadoContainer");
+
+                        // Crear el contenido HTML que deseas mostrar
+                        var contenidoHTML = '<form><div class="mb-3">';
+                        contenidoHTML += '<div class="mb-3"><label for="campo2" class="form-label">Numero de membresias vendidas</label>';
+                        contenidoHTML += '<input type="text" class="form-control" id="campo2" value="' + response.numero_de_membresias + '"readonly></div>';
+                        contenidoHTML += '<label for="campo1" class="form-label">Dia que mas se vendió:</label>';
+                        contenidoHTML += '<input type="text" class="form-control" id="campo1" value="' + response.fa_fecha + '" readonly></div>';
+                        contenidoHTML += '<div class="mb-3"><label for="campo3" class="form-label">Membresia mas vendida</label>';
+                        contenidoHTML += '<input type="text" class="form-control" id="campo3" value="' + response.tipo_menbresia + '"readonly>';
+                        contenidoHTML += '<div class="mb-3"><label for="campo3" class="form-label">Cantidad de membresia mas vendida</label>';
+                        contenidoHTML += '<input type="text" class="form-control" id="campo4" value="' + response.cantidad_vendida + '"readonly></div>';
+
+
+                        // Insertar el contenido HTML en el contenedor
+                        resultadoContainer.innerHTML = contenidoHTML;
+                    }
+                };
+                xhttp.open("GET", "TablaMonto.res.php?fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta, true);
+                xhttp.send();
+            }
+        </script>
 
     </body>
 

@@ -168,7 +168,7 @@ if (isset($_SESSION["em_id"])) {
                         <div class="modal-footer">
 
                            
-                            <button id="guardarbtn" class='btn btn-success'>guardar</button>
+                        <button id="guardarbtn" class='btn btn-success' disabled>guardar</button>
                           
 
                             <button type="button" class="btn btn-secondary" onclick="limpiar()" data-dismiss="modal">Cerrar</button>
@@ -218,32 +218,38 @@ if (isset($_SESSION["em_id"])) {
             });
         </script>
 
-        <script>
-            const passwordInput = document.getElementById('cli_contrasena');
-            const messageElement = document.getElementById('mensaje_contrasena');
+<script>
+    const passwordInput = document.getElementById('cli_contrasena');
+    const messageElement = document.getElementById('mensaje_contrasena');
+    const guardarButton = document.getElementById('guardarbtn');
 
-            passwordInput.addEventListener('input', function() {
-                const password = passwordInput.value;
-                const regexLowerCase = /[a-z]/;
-                const regexUpperCase = /[A-Z]/;
-                const regexNumbers = /[0-9]/;
-                const regexSpecialChars = /[!@#$%^&*()_+[\]{};':"\\|,.<>/?-]/;
+    passwordInput.addEventListener('input', function() {
+        const password = passwordInput.value;
+        const regexLowerCase = /[a-z]/;
+        const regexUpperCase = /[A-Z]/;
+        const regexNumbers = /[0-9]/;
+        const regexSpecialChars = /[!@#$%^&*()_+[\]{};':"\\|,.<>/?-]/;
 
-                let message = '';
-                if (password.length > 1) {
-                    if (!regexLowerCase.test(password) || !regexUpperCase.test(password) || !regexNumbers.test(password) ||
-                        !regexSpecialChars.test(password) || password.length < 8) {
-                        message += 'La contraseña debe tener minimo 8 caracteres, un caracter especial y una letra mayúscula.<br>';
-                    }
-                } else if (password.length < 1) {
-                    message += '';
-                }
+        let message = '';
+        if (password.length > 1) {
+            if (!regexLowerCase.test(password) || !regexUpperCase.test(password) || !regexNumbers.test(password) ||
+                !regexSpecialChars.test(password) || password.length < 8) {
+                message += 'La contraseña debe tener mínimo 8 caracteres, un caracter especial y una letra mayúscula.<br>';
+                // Desactiva el botón "guardar" si hay un mensaje de error
+                guardarButton.disabled = true;
+            } else {
+                // Activa el botón "guardar" si la contraseña es segura
+                guardarButton.disabled = false;
+            }
+        } else if (password.length < 1) {
+            message += '';
+            // Activa el botón "guardar" si la contraseña está vacía
+            guardarButton.disabled = false;
+        }
 
-
-
-                messageElement.innerHTML = message === '' ? '' : '<div style="color:red">' + message + '</div>';
-            });
-        </script>
+        messageElement.innerHTML = message === '' ? '' : '<div style="color:red">' + message + '</div>';
+    });
+</script>
 
         
         <script>

@@ -12,7 +12,7 @@ class facturaModel
         $con = new ClaseConexion();
         $con = $con->ProcedimientoConectar();
         $cliente_id = $_SESSION["cliente_id"];
-        $cadena = "SELECT * FROM recibos_membresia INNER JOIN cliente ON recibos_membresia.cli_id = cliente.cliente_id INNER JOIN tipo_menbresia ON recibos_membresia.men_id = tipo_menbresia.tipo_id  " ;
+        $cadena = "SELECT * FROM recibos_membresia INNER JOIN cliente ON recibos_membresia.cli_id = cliente.cliente_id INNER JOIN tipo_menbresia ON recibos_membresia.men_id = tipo_menbresia.tipo_id where recibos_membresia.estado='Pendiente' " ;
         $datos = mysqli_query($con, $cadena);
         return $datos;
     }

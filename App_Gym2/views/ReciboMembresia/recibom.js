@@ -126,11 +126,11 @@ function init() {
         console.log(respuesta)
         respuesta = JSON.parse(respuesta);
         if (respuesta == "ok") {
-          Swal.fire('Factura', 'Se guardo con exito', 'success');
+          Swal.fire('', 'Se guardó con éxito y se creo una membresia activa', 'success');
           limpiar();
           cargartablaF();
         } else {
-          Swal.fire('Factura', 'Ocurrio un error', 'danger');
+          Swal.fire('', 'Ocurrio un error', 'danger');
         }
       },
     });

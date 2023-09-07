@@ -26,7 +26,7 @@ if (isset($_SESSION["em_id"])) {
                     </style>
 
                     <div class="modal-header">
-                        <h5 class="modal-title" id="tituloModalFactura">Factura</h5>
+                        <h5 class="modal-title" id="tituloModalFactura">Recibo</h5>
 
 
                     </div>

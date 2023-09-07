@@ -8,6 +8,46 @@
             text-align: center;
             color: white;
         }
+
+        .bmi #result {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        .bmi .form-control {
+            background-color: #454d55;
+            /* Color de fondo de los campos de entrada */
+            border-color: #454d55;
+            /* Color del borde de los campos de entrada */
+            color: #ffffff;
+            /* Color del texto en los campos de entrada */
+            margin-bottom: 40px;
+            margin-right: 40px;
+
+        }
+
+        .bmi .bg-secondary {
+            background-color: #343a40;
+            /* Color de fondo de la columna derecha */
+        }
+        /* Agregar padding a la derecha de los campos de entrada y el botón */
+.bmi .form-control,
+.bmi .custom-select,
+.bmi #calculate-btn {
+    padding-right: 30px; /* Ajusta el valor según tu preferencia */
+}
+
+     /* Estilos para el contenido */
+     .container {
+            flex-grow: 1;
+            /* Esto permite que el contenido crezca y ocupe el espacio restante en la ventana */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+
     </style>
 </head>
 
@@ -82,6 +122,58 @@
         </div>
     </div>
     <!-- Gym Class End -->
+
+
+
+      <!-- Promo Start -->
+    <div class="container">
+        <h1 class="text-center">Nuestras membresias</h1>
+        <img src="../../public/img/Red White And Black Modern Fitness and Gym Center Instagram Post.gif" alt="Mi GIF" class="centered-gif">
+    </div>
+    <!-- Promo End -->
+
+        <div class="row">
+            <div class="col-lg-6 mb-5 blog-item">
+
+                <div class="d-flex align-items-center mb-4">
+                    <div class="d-flex flex-column align-items-center justify-content-center rounded-circle bg-primary text-white" style="width: 80px; height: 80px;">
+                        <small>24</small>
+                        <strong class="text-uppercase m-0 text-white">Agosto</strong>
+                        <small>2023</small>
+                    </div>
+                    <div class="pl-3">
+                        <h3 class="font-weight-bold">La Importancia de una Buena Alimentación para una Vida Saludable</h3>
+                        <div class="d-flex">
+                            <small class="mr-2 text-muted"><i class="fa fa-user"></i> Administrador</small>
+
+                        </div>
+                    </div>
+                </div>
+                <p class="text-justify">La alimentación juega un papel fundamental en nuestra salud y bienestar. Una dieta equilibrada y nutritiva no solo nos proporciona la energía necesaria para llevar a cabo nuestras actividades diarias, sino que también es esencial para prevenir enfermedades y mantener un estilo de vida saludable. A continuación</p>
+                <a class="btn btn-outline-primary mt-2 px-3" href="./blog.php">Mas Información <i class="fa fa-angle-right"></i></a>
+            </div>
+            <div class="col-lg-6 mb-5 blog-item">
+
+                <div class="d-flex align-items-center mb-4">
+                    <div class="d-flex flex-column align-items-center justify-content-center rounded-circle bg-primary text-white" style="width: 80px; height: 80px;">
+                        <small>24</small>
+                        <strong class="text-uppercase m-0 text-white">Agosto</strong>
+                        <small>2023</small>
+                    </div>
+                    <div class="pl-3">
+                        <h3 class="font-weight-bold">Los Beneficios del Ejercicio para una Vida Saludable</h3>
+                        <div class="d-flex">
+                            <small class="mr-2 text-muted"><i class="fa fa-user"></i> Administrador</small>
+
+                        </div>
+                    </div>
+                </div>
+                <p class="text-justify">El ejercicio físico regular no solo es esencial para mantener un cuerpo en forma, sino que también tiene un impacto profundo en nuestra salud mental y emocional. Desde la mejora de la condición cardiovascular hasta la reducción del estrés, los beneficios del ejercicio son numerosos y variados.</p>
+                <a class="btn btn-outline-primary mt-2 px-3" href="./blog.php">Mas Información <i class="fa fa-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- Promo End -->
 
 
 
@@ -184,23 +276,7 @@
     <!-- GYM Feature End -->
 
 
-    <!-- Subscribe Start -->
-
-    <!-- <div class="subscribe container-fluid my-5 py-5 text-center">
-        <h4 class="display-4 text-white font-weight-bold mt-5 mb-3">Subscribe Our Newsletter</h4>
-        <p class="text-white mb-4">Subscribe and get Our latest article in your inbox</p>
-        <form class="form-inline justify-content-center mb-5">
-            <div class="input-group">
-                <input type="text" class="form-control-lg" placeholder="Your Email">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Subscribe</button>
-                </div>
-            </div>
-        </form>
-    </div>-->
-
-    <!-- Subscribe End -->
-
+    
 
 
 
@@ -224,7 +300,7 @@
                                     <input type="text" id="weight" class="form-control form-control-lg bg-dark text-white" placeholder="Peso (KG)">
                                 </div>
                                 <div class="col form-group">
-                                    <input type="text" id="height" class="form-control form-control-lg bg-dark text-white" placeholder="Altura (CM)">
+                                    <input type="text" id="height" class="form-control form-control-lg bg-dark text-white" placeholder="Altura (M)">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -254,72 +330,74 @@
     <!-- BMI Calculation End -->
 
 
-<!--                                mostrar fecha membresia                        -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
-<script>
-    $(document).ready(function() {
-        <?php
-        session_start();
 
-        // Asegúrate de que $_SESSION['bienvenida'] esté configurada correctamente
-        if (isset($_SESSION['bienvenida'])) {
-            echo "Swal.fire({
+    <!--                                mostrar fecha membresia                        -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            <?php
+            session_start();
+
+            // Asegúrate de que $_SESSION['bienvenida'] esté configurada correctamente
+            if (isset($_SESSION['bienvenida'])) {
+                echo "Swal.fire({
                 icon: 'success',
                 title: 'Bienvenida',
                 text: '{$_SESSION['bienvenida']} Cargando información de membresía...',
             });";
-            unset($_SESSION['bienvenida']); // Limpiar la variable de sesión
-        }
-        ?>
+                unset($_SESSION['bienvenida']); // Limpiar la variable de sesión
+            }
+            ?>
 
-$.ajax({
-    url: "../../controllers/membresia.controller.php?op=todos",
-    success: function(membresiaCliente) {
-        console.log(membresiaCliente); 
-        const membresiaData = JSON.parse(membresiaCliente);
+            $.ajax({
+                url: "../../controllers/membresia.controller.php?op=todos",
+                success: function(membresiaCliente) {
+                    console.log(membresiaCliente);
+                    const membresiaData = JSON.parse(membresiaCliente);
+
+                    if (membresiaData.length > 0 && membresiaData[0].men_fecha_fin) {
+                        const fechaFinMembresia = membresiaData[0].men_fecha_fin;
+                        const tiempoRestante = calcularTiempoRestante(fechaFinMembresia);
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Bienvenido',
+                            text: `<?php echo $_SESSION['bienvenido']; ?> Tu membresía expirará en ${tiempoRestante}.`,
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'No posee una membresía activa actualmente',
+                            text: 'No se encontró información de membresía para el cliente actual.',
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(error); // Muestra cualquier error en la consola
+                }
+            });
+
+
+            function calcularTiempoRestante(fechaFinMembresia) {
+                const fechaFin = new Date(fechaFinMembresia).getTime();
+                console.log(fechaFin);
+                const fechaActual = new Date().getTime();
+                const tiempoRestanteEnMilisegundos = fechaFin - fechaActual;
+
+                const diasRestantes = Math.floor(tiempoRestanteEnMilisegundos / (1000 * 60 * 60 * 24));
+                const horasRestantes = Math.floor((tiempoRestanteEnMilisegundos % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutosRestantes = Math.floor((tiempoRestanteEnMilisegundos % (1000 * 60 * 60)) / (1000 * 60));
+                const segundosRestantes = Math.floor((tiempoRestanteEnMilisegundos % (1000 * 60)) / 1000);
+
+                const tiempoRestanteFormateado = `${diasRestantes} días, ${horasRestantes} horas, ${minutosRestantes} minutos, ${segundosRestantes} segundos`;
+
+                return tiempoRestanteFormateado;
+            }
+        });
         
-        if (membresiaData.length > 0 && membresiaData[0].men_fecha_fin) {
-            const fechaFinMembresia = membresiaData[0].men_fecha_fin;
-            const tiempoRestante = calcularTiempoRestante(fechaFinMembresia);
 
-            Swal.fire({
-                icon: 'success',
-                title: 'Bienvenido',
-                text: `<?php echo $_SESSION['bienvenido']; ?> Tu membresía expirará en ${tiempoRestante}.`,
-            });
-        } else {
-            Swal.fire({
-                icon: 'warning',
-                title: 'No posee una membresía activa actualmente',
-                text: 'No se encontró información de membresía para el cliente actual.',
-            });
-        }
-    },
-    error: function(xhr, status, error) {
-        console.log(error); // Muestra cualquier error en la consola
-    }
-});
-
-
-        function calcularTiempoRestante(fechaFinMembresia) {
-            const fechaFin = new Date(fechaFinMembresia).getTime();
-            console.log(fechaFin); 
-            const fechaActual = new Date().getTime();
-            const tiempoRestanteEnMilisegundos = fechaFin - fechaActual;
-
-            const diasRestantes = Math.floor(tiempoRestanteEnMilisegundos / (1000 * 60 * 60 * 24));
-            const horasRestantes = Math.floor((tiempoRestanteEnMilisegundos % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutosRestantes = Math.floor((tiempoRestanteEnMilisegundos % (1000 * 60 * 60)) / (1000 * 60));
-            const segundosRestantes = Math.floor((tiempoRestanteEnMilisegundos % (1000 * 60)) / 1000);
-
-            const tiempoRestanteFormateado = `${diasRestantes} días, ${horasRestantes} horas, ${minutosRestantes} minutos, ${segundosRestantes} segundos`;
-
-            return tiempoRestanteFormateado;
-        }
-    });
-
-</script>
+    </script>
 
 
 
@@ -432,4 +510,5 @@ $.ajax({
     <!-- Fin-->
 
 </body>
+
 </html>
